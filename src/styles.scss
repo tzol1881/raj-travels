@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { 
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+ }
+
+.custom-dialog-container{
+    max-height: 90vh;
+}
+
+.mat-elevation-z8{
+    //overflow-x: scroll;
+}
+
+.mat-drawer-container{
+    height: 100vh;
+}
+.mat-drawer-inner-container{
+    // display: flex;
+    .nav{
+        padding: 2vw;
+        a{
+            text-decoration: none;
+            color: #3f51b5;
+            &:hover{
+                color: #000000
+            }
+        }
+    }
+}
+
+.mat-form-field-infix{
+    display: flex !important;
+    align-items: center;
+}
+
+.mat-drawer-content{
+    background: url('./assets/images/banner2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.mat-table{
+    background: none;
+    background-color: #eaf3f3;
+    opacity: 0.9;
+    td{
+        font-size: 16px;
+    }
+
+    th{
+        font-size: 14px;
+    }
+}
+
+.mat-paginator{
+    background: none;
+    background-color: #eaf3f3;
+    opacity: 0.9;
+}
+
+.mat-elevation-z8{
+    opacity: 0.9;
+    background-color: #eaf3f3;
+}
+
+@media screen and (max-width: 940px) {
+    .mat-elevation-z8{
+        overflow-x: scroll;
+    }
+}

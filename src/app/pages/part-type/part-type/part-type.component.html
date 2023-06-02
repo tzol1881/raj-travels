@@ -1,0 +1,54 @@
+<div class="container">
+  <h1 class="products-title">Part type</h1>
+  <button class="add-product-button" type="button" (click)="addPartType()" mat-stroked-button color="primary"><mat-icon>add</mat-icon> Add new part type</button>
+  <div class="mat-elevation-z8">
+    <mat-form-field appearance="outline">
+      <mat-label>Search Product</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Interior" #input>
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="Type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Part Type </th>
+        <td mat-cell *matCellDef="let element"><span
+            class="title">{{element.part_type}}</span></td>
+      </ng-container>
+
+      <ng-container matColumnDef="Cost">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cost </th>
+        <td mat-cell *matCellDef="let element"><span>&#8377;</span>{{element.part_Cost}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Quantity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+        <td mat-cell *matCellDef="let element">{{element.part_type_qty}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" matTooltip="Edit part type" matTooltipPosition="after"
+            (click)="editPartType(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" matTooltip="Delete part type" matTooltipPosition="after"
+            (click)="deletePartType(element.id)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 30]" showFirstLastButtons
+      aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+</div>

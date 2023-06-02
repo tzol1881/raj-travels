@@ -1,0 +1,102 @@
+<div class="edit-product-form-container">
+    <h3 class="products-title">{{title}}</h3>
+    <form class="edit-product-form" [formGroup]="editVehical" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+            <mat-label>Registration number</mat-label>
+            <input matInput type="number" formControlName="Reg_no">
+            <mat-error *ngIf="editVehical?.get('Reg_no')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editVehical?.get('Reg_no')?.hasError('inValidLength')">Max length should be 10</mat-error>
+        </mat-form-field>
+        <mat-form-field class="date-input" appearance="outline">
+            <mat-label>Choose a registration date</mat-label>
+            <input matInput formControlName="Reg_date" [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Owner name</mat-label>
+            <input matInput type="text" formControlName="Veh_Owner_Name">
+            <mat-error *ngIf="editVehical?.get('Veh_Owner_Name')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editVehical?.get('Veh_Owner_Name')?.hasError('inValidLength')">Max length should be 100</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Owner address</mat-label>
+            <input matInput type="text" formControlName="Veh_Owner_Address">
+            <mat-error *ngIf="editVehical?.get('Veh_Owner_Address')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editVehical?.get('Veh_Owner_Address')?.hasError('inValidLength')">Max length should be 100</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Chassis number</mat-label>
+            <input matInput type="text" formControlName="Veh_Chassis_No">
+            <mat-error *ngIf="editVehical?.get('Veh_Chassis_No')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editVehical?.get('Veh_Chassis_No')?.hasError('inValidLength')">Max length should be 18</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Engine number</mat-label>
+            <input matInput type="text" formControlName="Veh_Engine_No">
+            <mat-error *ngIf="editVehical?.get('Veh_Engine_No')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editVehical?.get('Veh_Engine_No')?.hasError('inValidLength')">Max length should be 12</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Class</mat-label>
+            <input matInput type="text" formControlName="Veh_Class">
+            <mat-error *ngIf="editVehical?.get('Veh_Class')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editVehical?.get('Veh_Class')?.hasError('inValidLength')">Max length should be 18</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Maker name</mat-label>
+            <input matInput type="text" formControlName="Veh_Maker_Name">
+            <mat-error *ngIf="editVehical?.get('Veh_Maker_Name')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editVehical?.get('Veh_Maker_Name')?.hasError('inValidLength')">Max length should be 25</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Seating capacity</mat-label>
+            <input matInput type="number" formControlName="Veh_Seating_Cap">
+            <mat-error *ngIf="editVehical?.get('Veh_Seating_Cap')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editVehical?.get('Veh_Seating_Cap')?.hasError('inValidLength')">Max length should be 11</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Color</mat-label>
+            <input matInput type="text" formControlName="Veh_Color">
+            <mat-error *ngIf="editVehical?.get('Veh_Color')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editVehical?.get('Veh_Color')?.hasError('inValidLength')">Max length should be 25</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Horse power</mat-label>
+            <input matInput type="text" formControlName="Veh_horse_Power">
+            <mat-error *ngIf="editVehical?.get('Veh_horse_Power')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editVehical?.get('Veh_horse_Power')?.hasError('inValidLength')">Max length should be 25</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Fuel type</mat-label>
+            <mat-select [(value)]="selectedFuel" formControlName="Veh_Fuel_Type">
+                <mat-option>None</mat-option>
+                <mat-option value="diesel">Diesel</mat-option>
+                <mat-option value="petrol">Petrol</mat-option>
+                <mat-option value="cng">CNG</mat-option>
+                <mat-option value="ev">EV</mat-option>
+            </mat-select>
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>City</mat-label>
+            <mat-select [(value)]="selectedCity" formControlName="Veh_Reg_City_ID">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let city of cities" [value]="city['id']">{{city['name']}}</mat-option>
+            </mat-select>
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>State</mat-label>
+            <mat-select [(value)]="selectedState" formControlName="Veh_Reg_State_ID">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let state of states" [value]="state['id']">{{state['state_name']}}</mat-option>
+            </mat-select>
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+        <div class="button-container">
+            <button type="button" (click)="onCancel()" mat-stroked-button color="primary">Cancel</button>
+            <button type="submit" mat-stroked-button color="primary" [disabled]="!editVehical.valid">Save</button>
+        </div>
+    </form>
+</div>

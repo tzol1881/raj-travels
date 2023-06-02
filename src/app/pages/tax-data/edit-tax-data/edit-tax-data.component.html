@@ -1,0 +1,53 @@
+<div class="edit-product-form-container">
+    <h3 class="products-title">{{title}}</h3>
+    <form class="edit-product-form" [formGroup]="editTaxData" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+            <mat-label>Tax type</mat-label>
+            <mat-select [(value)]="selectedRegNo" formControlName="tax_type_master_id">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let taxType of taxTypes" [value]="taxType['id']">{{taxType['tax_type']}}</mat-option>
+            </mat-select>
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Bus registration number</mat-label>
+            <mat-select [(value)]="selectedRegNo" formControlName="reg_no">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let registrationNumber of registrationNumbers" [value]="registrationNumber['Reg_no']">{{registrationNumber['Reg_no']}}</mat-option>
+            </mat-select>
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Tax amount</mat-label>
+            <input matInput type="number" formControlName="tax_type_amount">
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+        <mat-form-field class="date-input" appearance="outline">
+            <mat-label>Choose tax start date</mat-label>
+            <input matInput formControlName="tax_type_submission_start_date" [matDatepicker]="frompicker">
+            <mat-datepicker-toggle matIconSuffix [for]="frompicker"></mat-datepicker-toggle>
+            <mat-datepicker #frompicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="date-input" appearance="outline">
+            <mat-label>Choose a tax end date</mat-label>
+            <input matInput formControlName="tax_type_submission_end_date" [matDatepicker]="topicker">
+            <mat-datepicker-toggle matIconSuffix [for]="topicker"></mat-datepicker-toggle>
+            <mat-datepicker #topicker></mat-datepicker>
+        </mat-form-field>
+        <mat-error *ngIf="editTaxData.errors && editTaxData.errors['dateValid'] && (editTaxData.touched ||editTaxData.dirty)">End date should be greater than start date</mat-error>
+        <mat-form-field appearance="outline">
+            <mat-label>Validity</mat-label>
+            <input matInput type="text" formControlName="tax_type_validity">
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Current reading</mat-label>
+            <input matInput type="text" formControlName="vehicle_meter_reading">
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+        <div class="button-container">
+            <button type="button" (click)="onCancel()" mat-stroked-button color="primary">Cancel</button>
+            <button type="submit" mat-stroked-button color="primary" [disabled]="!editTaxData.valid">Save</button>
+        </div>
+    </form>
+</div>

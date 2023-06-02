@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="login-container">
+        <h1 class="title">Login here</h1>
+        <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput type="email" formControlName="username">
+                <mat-error>Required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password">
+                <button class="eye-icon" type="button" mat-icon-button fontSet="material-icons-outlined"
+                    (click)="togglePasswordVisibility()" matSuffix>
+                    <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error>Required</mat-error>
+            </mat-form-field>
+            <button type="submit" mat-raised-button color="primary">Login</button><br>
+            <mat-error *ngIf="!isValidUser">Invalid username or password</mat-error>
+        </form>
+    </div>
+</div>

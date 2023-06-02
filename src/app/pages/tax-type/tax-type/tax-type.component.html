@@ -1,0 +1,61 @@
+<div class="container">
+    <h1 class="products-title">Tax types</h1>
+    <button class="add-product-button" type="button" (click)="addTaxType()" mat-stroked-button color="primary"><mat-icon>add</mat-icon> Add new tax type</button>
+    <div class="mat-elevation-z8">
+      <mat-form-field appearance="outline">
+        <mat-label>Search Product</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="tax type" #input>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="Type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Tax type </th>
+          <td mat-cell *matCellDef="let element"><span
+              class="title">{{element.tax_type}}</span></td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Validity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Validity </th>
+          <td mat-cell *matCellDef="let element">{{element.tax_type_validity}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Cost">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Cost </th>
+          <td mat-cell *matCellDef="let element"><span>&#8377;</span>{{element.tax_cost}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+          <td mat-cell *matCellDef="let element">{{element.tax_type_status}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="primary" matTooltip="Edit tax type" matTooltipPosition="after"
+              (click)="editTaxType(element)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" matTooltip="Delete tax type" matTooltipPosition="after"
+              (click)="deleteTaxType(element.id)">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20, 30]" showFirstLastButtons
+        aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </div>
+  

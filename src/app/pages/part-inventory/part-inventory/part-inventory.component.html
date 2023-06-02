@@ -1,0 +1,85 @@
+<div class="container">
+    <h1 class="products-title">Inventory data</h1>
+    <button class="add-product-button" type="button" (click)="addPartInventory()" mat-stroked-button color="primary"><mat-icon>add</mat-icon> Add new inventory</button>
+    <div class="mat-elevation-z8">
+      <mat-form-field appearance="outline">
+        <mat-label>Search inventory data</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. part inventory" #input>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="Part type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Part type </th>
+          <td mat-cell *matCellDef="let element"><span
+              class="title">{{element.part_type_id}}</span></td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Quantity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+          <td mat-cell *matCellDef="let element">{{element.part_type_qty}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Cost">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Cost </th>
+          <td mat-cell *matCellDef="let element">{{element.part_cost}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Expiry date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Expiry date </th>
+            <td mat-cell *matCellDef="let element">{{element.part_expiry_dt}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Issued date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Issued date </th>
+            <td mat-cell *matCellDef="let element">{{element.part_expiry_dt}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Purchase date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Purchase date </th>
+            <td mat-cell *matCellDef="let element">{{element.part_type_purchase_dt}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Invoice no">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Invoice no </th>
+            <td mat-cell *matCellDef="let element">{{element.part_type_invoice_nbr}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Manufacturer">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Manufacturer </th>
+            <td mat-cell *matCellDef="let element">{{element.part_type_manufaturer}}
+            </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="primary" matTooltip="Edit inventory" matTooltipPosition="after"
+              (click)="editPartInventory(element)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" matTooltip="Delete inventory" matTooltipPosition="after"
+              (click)="deletePartInventory(element.id)">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20, 30]" showFirstLastButtons
+        aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </div>
+  

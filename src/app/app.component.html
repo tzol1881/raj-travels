@@ -1,0 +1,24 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+        <div class="nav" (click)="drawer.toggle()"><a [routerLink]="['/dashboard']">Dashboard</a></div>
+        <div class="nav" (click)="drawer.toggle()"><a [routerLink]="['/vehicals']">Vehical master</a></div>
+        <div class="nav" (click)="drawer.toggle()"><a [routerLink]="['/partTypes']">Part type master</a></div>
+        <div class="nav" (click)="drawer.toggle()"><a [routerLink]="['/taxTypes']">Tax type master</a></div>
+        <div class="nav" (click)="drawer.toggle()"><a [routerLink]="['/taxData']">Tax data master</a></div>
+        <div class="nav" (click)="drawer.toggle()"><a [routerLink]="['/partTypeMaintanance']">Part maintance</a></div>
+        <div class="nav" (click)="drawer.toggle()"><a [routerLink]="['/partInventory']">Part inventory</a></div>
+    </mat-drawer>
+  
+    <div class="example-sidenav-content">
+      <app-navbar *ngIf="showNavbar">
+        <div class="menu-container">
+            <button type="button" mat-button (click)="drawer.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <div class="title">Raj Travels</div>
+        </div>
+      </app-navbar>
+      <router-outlet></router-outlet>
+    </div>
+  
+</mat-drawer-container>
