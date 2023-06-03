@@ -6,9 +6,9 @@ import { Injectable } from '@angular/core';
 export class TaxDataService {
 
   constructor() { }
-
+  port = 'https://www.icoy.co.in/transport/api'
   getTaxData(){
-    return  fetch('http://127.0.0.1:8000/api/getTaxDateList',{
+    return  fetch(`${this.port}/getTaxDateList`,{
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -23,7 +23,7 @@ export class TaxDataService {
   }
 
   getVehicleReg(){
-    return  fetch('http://127.0.0.1:8000/api/getVehicleReg ',{
+    return  fetch(`${this.port}/getVehicleReg`,{
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -38,7 +38,7 @@ export class TaxDataService {
   }
 
   addTaxData(data: any){
-    return  fetch('http://127.0.0.1:8000/api/addTaxDate',{
+    return  fetch(`${this.port}/addTaxDate`,{
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -53,7 +53,7 @@ export class TaxDataService {
   }
 
   editTaxData(data: any){
-    return  fetch('http://127.0.0.1:8000/api/editTaxDate',{
+    return  fetch(`${this.port}/editTaxDate`,{
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -68,7 +68,7 @@ export class TaxDataService {
   }
 
   deleteTaxData(data: any){
-    return  fetch('http://127.0.0.1:8000/api/deleteTaxDate',{
+    return  fetch(`${this.port}/deleteTaxDate`,{
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -83,7 +83,7 @@ export class TaxDataService {
   }
 
   getuniqueTaxtype(){
-    return  fetch('http://127.0.0.1:8000/api/getuniqueTaxtype',{
+    return  fetch(`${this.port}/getuniqueTaxtype`,{
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -98,7 +98,7 @@ export class TaxDataService {
   }
 
   getTaxTypeCombo(){
-    return  fetch('http://127.0.0.1:8000/api/getTaxTypeCombo',{
+    return  fetch(`${this.port}/api/getTaxTypeCombo`,{
       method: "POST",
       mode: "cors",
       cache: "no-cache",
