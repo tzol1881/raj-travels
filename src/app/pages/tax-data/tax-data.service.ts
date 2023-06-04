@@ -98,7 +98,7 @@ export class TaxDataService {
   }
 
   getTaxTypeCombo(){
-    return  fetch(`${this.port}/api/getTaxTypeCombo`,{
+    return  fetch(`${this.port}/getTaxTypeCombo`,{
       method: "POST",
       mode: "cors",
       cache: "no-cache",

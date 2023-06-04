@@ -3,7 +3,7 @@
     <form class="edit-product-form" [formGroup]="editTaxData" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline">
             <mat-label>Tax type</mat-label>
-            <mat-select [(value)]="selectedRegNo" formControlName="tax_type_master_id">
+            <mat-select [(value)]="selectedType" formControlName="tax_type_master_id">
                 <mat-option>None</mat-option>
                 <mat-option *ngFor="let taxType of taxTypes" [value]="taxType['id']">{{taxType['tax_type']}}</mat-option>
             </mat-select>

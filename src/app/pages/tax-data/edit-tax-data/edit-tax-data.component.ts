@@ -64,7 +64,7 @@ export class EditTaxDataComponent implements OnInit {
   onSubmit(){
     if(this.editTaxData && this.editTaxData?.controls['id']?.value){
       let data = {...this.editTaxData.value}
-      let startDateData = new Date(data.tax_type_submission_start_date);debugger
+      let startDateData = new Date(data.tax_type_submission_start_date);
       data.tax_type_submission_start_date = `${startDateData.getFullYear()}-${startDateData.getMonth() + 1}-${startDateData.getDate()}`;
       let endDateData = new Date(data.tax_type_submission_end_date);
       data.tax_type_submission_end_date = `${endDateData.getFullYear()}-${endDateData.getMonth() + 1}-${endDateData.getDate()}`;

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
-        if('admin' === this.loginFormValue.username && '123' === this.loginFormValue.password){
+        if('admin' === this.loginFormValue.username && 'admin@123' === this.loginFormValue.password){
             sessionStorage.setItem('userId', 'admin');
             this.authenticationService.isValid.next(true);
             this.router.navigate(['/dashboard']);
