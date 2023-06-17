@@ -1,0 +1,133 @@
+<div class="container">
+    <h1 class="products-title">Employee list</h1>
+    <button class="add-product-button" type="button" (click)="addEmployee()" mat-stroked-button color="primary"><mat-icon>add</mat-icon> Add new employee</button>
+    <div class="mat-elevation-z8">
+      <mat-form-field appearance="outline">
+        <mat-label>Search employee</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Empolyee" #input>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="Number">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Number </th>
+          <td mat-cell *matCellDef="let element"><span
+              class="title">{{element.employee_number}}</span></td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let element">{{element.employee_name}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Address">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+          <td mat-cell *matCellDef="let element">{{element.employee_address}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Type</th>
+          <td mat-cell *matCellDef="let element">{{element.employee_type}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Subtype">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Subtype </th>
+          <td mat-cell *matCellDef="let element">{{element.employee_sub_type}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Gender">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+          <td mat-cell *matCellDef="let element">{{element.gender}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+          <td mat-cell *matCellDef="let element">{{element.status}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="State">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> State </th>
+          <td mat-cell *matCellDef="let element">{{element.state}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="City">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> City </th>
+          <td mat-cell *matCellDef="let element">{{element.city}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Country">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
+          <td mat-cell *matCellDef="let element">{{element.country}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="EmailId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> EmailId </th>
+          <td mat-cell *matCellDef="let element">{{element.email_id}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Cost">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Cost </th>
+          <td mat-cell *matCellDef="let element">{{element.monthly_cost}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Start date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Start date </th>
+          <td mat-cell *matCellDef="let element">{{element.employee_start_date}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Phone no.">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone no. </th>
+          <td mat-cell *matCellDef="let element">{{element.phone_no}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Alternate no.">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Alternate no. </th>
+            <td mat-cell *matCellDef="let element">{{element.alt_phone_no}}
+            </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Remarks">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Remarks </th>
+            <td mat-cell *matCellDef="let element">{{element.remarks}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="primary" matTooltip="Edit part type" matTooltipPosition="after"
+              (click)="editVehical(element)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" matTooltip="Delete part type" matTooltipPosition="after"
+              (click)="deleteVehical(element.id)">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20, 30]" showFirstLastButtons
+        aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </div>
+  

@@ -2,85 +2,91 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { ProductDetailsComponent } from 'src/app/components/product-details/product-details.component';
 import { Router } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
+import { DeleteEmployeeComponent } from '../delete-employee/delete-employee.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { EditTaxDataComponent } from '../edit-tax-data/edit-tax-data.component';
-import { DeleteTaxDataComponent } from '../delete-tax-data/delete-tax-data.component';
-import { TaxDataService } from '../tax-data.service';
+import { EmployeeService } from 'src/app/services/employee.service';
+import { EditEmployeeComponent } from '../edit-employee/edit-employee.component';
 
 @Component({
-  selector: 'app-tax-data',
-  templateUrl: './tax-data.component.html',
-  styleUrls: ['./tax-data.component.scss']
+  selector: 'app-employee',
+  templateUrl: './employee.component.html',
+  styleUrls: ['./employee.component.scss']
 })
-export class TaxDataComponent implements OnInit {
+export class EmployeeComponent implements OnInit {
 
-  taxTypes: [] = [];
-  displayedColumns: string[] = ['Type', 'Validity', 'Bus number', 'From date', 'to date', 'Reading', 'Cost', 'action'];
+  employees: [] = [];
+  displayedColumns: string[] = ['Number', 'Name', 'Address', 'Type', 'Subtype', 'Gender', 'Status', 'State', 'City', 'Country', 'EmailId','Cost', 'Start date', 'Phone no.', 'Alternate no.', 'Remarks', 'action'];
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
   dataSource = new MatTableDataSource();
 
-  constructor(private taxDataService: TaxDataService,
+  constructor(private employeeService: EmployeeService,
               public dialog: MatDialog,
               public router: Router,
               private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.getTaxData();
-    this.taxDataService.getuniqueTaxtype().then(res => res.json())
-    .then(json => {
-    })
+    this.getEmployees()
   }
 
-  getTaxData() {
-    this.taxDataService.getTaxData()
+  getEmployees() {
+    this.employeeService.getEmployeeList()
       .then(res => res.json())
       .then(json => {
-        this.taxTypes = json.data;
-        this.dataSource.data = [...this.taxTypes]
+        this.employees = json.data;
+        this.dataSource.data = [...this.employees]
       })
   }
 
-  editTaxData(taxData: any): void {
-    const dialogRef = this.dialog.open(EditTaxDataComponent, {
+  viewPartType(employee: any): void {
+    this.dialog.open(ProductDetailsComponent, {
+      width: '50rem',
+      data: { employee: employee },
+    });
+  }
+
+  editVehical(employee: any): void {
+    const dialogRef = this.dialog.open(EditEmployeeComponent, {
       panelClass: 'custom-dialog-container',
       width: '50rem',
-      data: { taxData: taxData },
+      data: { employee: employee },
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getTaxData();
+        this.getEmployees();
         this.snackBar.open(result.message,'X')
       }
   });
   }
 
-  addTaxData(): void {
-    const dialogRef = this.dialog.open(EditTaxDataComponent, {
+  addEmployee(): void {
+    const dialogRef = this.dialog.open(EditEmployeeComponent, {
       panelClass: 'custom-dialog-container',
       width: '50rem',
-      data: { taxType: null },
+      data: { employee: null },
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getTaxData();
+        this.getEmployees();
         this.snackBar.open(result.message,'X')
       }
   });
   }
 
-  deleteTaxData(taxTypeId: number): void {
-    const dialogRef = this.dialog.open(DeleteTaxDataComponent, {
+  deleteVehical(employeeId: number): void {
+    const dialogRef = this.dialog.open(DeleteEmployeeComponent, {
       width: '25rem',
       data: { 
-        id: taxTypeId
-      },
+        id: employeeId,
+        type: 'employee'
+       },
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.getTaxData();
+        this.getEmployees();
         this.snackBar.open(result.message,'X')
       }
     });

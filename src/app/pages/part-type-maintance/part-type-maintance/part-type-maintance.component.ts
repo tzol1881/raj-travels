@@ -31,7 +31,6 @@ export class PartTypeMaintanceComponent implements OnInit {
     this.getPartTypeMaintance();
     this.partTypeMaintanceService.getPartTypeCombo().then(res => res.json())
     .then(json => {
-      console.log(json)
     })
   }
 
@@ -39,7 +38,6 @@ export class PartTypeMaintanceComponent implements OnInit {
     this.partTypeMaintanceService.getPartTypes()
       .then(res => res.json())
       .then(json => {
-        console.log(json.data);
         this.partTypeMaintances = json.data;
         this.dataSource.data = [...this.partTypeMaintances]
       })

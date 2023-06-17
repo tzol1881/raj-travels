@@ -37,7 +37,6 @@ export class VehicalListComponent implements OnInit {
       .then(res => res.json())
       .then(json => {
         this.vehicals = json.data;
-        console.log(this.vehicals);
         this.dataSource.data = [...this.vehicals]
       })
   }

@@ -1,0 +1,137 @@
+<div class="edit-product-form-container">
+    <h3 class="products-title">{{title}}</h3>
+    <form class="edit-product-form" [formGroup]="editEmployee" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+            <mat-label>Employee number</mat-label>
+            <input matInput type="text" formControlName="employee_number">
+            <mat-error *ngIf="editEmployee?.get('employee_number')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editEmployee?.get('employee_number')?.hasError('inValidLength')">Max length should be 40</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Employee name</mat-label>
+            <input matInput type="text" formControlName="employee_name">
+            <mat-error *ngIf="editEmployee?.get('employee_name')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editEmployee?.get('employee_name')?.hasError('inValidLength')">Max length should be 150</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Employee address</mat-label>
+            <input matInput type="text" formControlName="employee_address">
+            <mat-error *ngIf="editEmployee?.get('employee_address')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editEmployee?.get('employee_address')?.hasError('inValidLength')">Max length should be 250</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Employee type</mat-label>
+            <mat-select [(value)]="selectedType" formControlName="employee_type">
+                <mat-option>None</mat-option>
+                <mat-option value="permanent">Permanent</mat-option>
+                <mat-option value="temporary">Temporary</mat-option>
+            </mat-select>
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Employee subtype</mat-label>
+            <mat-select [(value)]="selectedSubtype" formControlName="employee_sub_type">
+                <mat-option>None</mat-option>
+                <mat-option value="driver">Driver</mat-option>
+                <mat-option value="cleaner">Cleaner</mat-option>
+            </mat-select>
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Gender</mat-label>
+            <mat-select [(value)]="selectedGender" formControlName="gender">
+                <mat-option>None</mat-option>
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="female">Female</mat-option>
+            </mat-select>
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select [(value)]="selectedStatus" formControlName="status">
+                <mat-option>None</mat-option>
+                <mat-option value="1">Active</mat-option>
+                <mat-option value="0">Inactive</mat-option>
+            </mat-select>
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>State</mat-label>
+            <mat-select [(value)]="selectedState" formControlName="state_id">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let state of states" [value]="state['id']">{{state['state_name']}}</mat-option>
+            </mat-select>
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>City</mat-label>
+            <mat-select [(value)]="selectedCity" formControlName="city_id">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let city of cities" [value]="city['id']">{{city['name']}}</mat-option>
+            </mat-select>
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Country</mat-label>
+            <mat-select [(value)]="selectedCountry" formControlName="country_id">
+                <mat-option>None</mat-option>
+                <mat-option value="1">India</mat-option>
+            </mat-select>
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Employee emailId</mat-label>
+            <input matInput type="text" formControlName="email_id">
+            <mat-error *ngIf="editEmployee?.get('email_id')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editEmployee?.get('email_id')?.hasError('email')">Invalid email id</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Monthly cost</mat-label>
+            <input matInput type="number" formControlName="monthly_cost">
+            <mat-error *ngIf="editEmployee?.get('monthly_cost')?.hasError('required')">Required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="date-input" appearance="outline">
+            <mat-label>Choose a Employee start date</mat-label>
+            <input matInput formControlName="employee_start_date" [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Phone number</mat-label>
+            <input matInput type="number" formControlName="phone_no">
+            <mat-error *ngIf="editEmployee?.get('email_id')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editEmployee?.get('email_id')?.hasError('inValidLength')">Max length should be 50</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Alternate phone number</mat-label>
+            <input matInput type="number" formControlName="alt_phone_no">
+            <mat-error *ngIf="editEmployee?.get('email_id')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editEmployee?.get('email_id')?.hasError('inValidLength')">Max length should be 50</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Remarks</mat-label>
+            <input matInput type="text" formControlName="remarks">
+            <mat-error *ngIf="editEmployee?.get('remarks')?.hasError('required')">Required</mat-error>
+        </mat-form-field>
+
+        <div class="button-container">
+            <button type="button" (click)="onCancel()" mat-stroked-button color="primary">Cancel</button>
+            <button type="submit" mat-stroked-button color="primary" [disabled]="!editEmployee.valid">Save</button>
+        </div>
+    </form>
+</div>

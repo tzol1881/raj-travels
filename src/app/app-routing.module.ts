@@ -42,6 +42,11 @@ const routes: Routes = [
     path: 'partInventory',
     loadChildren: () => import('./pages/part-inventory/part-inventory.module').then(m => m.PartInventoryModule),
     canActivate: [AuthenticationGuardService]
+  },
+  {
+    path: 'employee',
+    loadChildren: () => import('./pages/employee/employee.module').then(m => m.EmployeeModule),
+    canActivate: [AuthenticationGuardService]
   }
 ];
 

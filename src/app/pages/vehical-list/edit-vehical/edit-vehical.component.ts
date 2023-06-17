@@ -67,7 +67,6 @@ export class EditVehicalComponent implements OnInit {
     .then(json => {
       this.cities = json.data;
       this.vehical.vehical ? this.selectedCity = this.cities.filter(city => city['name'] === this.vehicalDetails.Veh_Reg_City_ID)[0]['id'] : '';
-      console.log(this.selectedCity)
       this.editVehical.controls['Veh_Reg_City_ID'].setValue(this.selectedCity);
     })
   }

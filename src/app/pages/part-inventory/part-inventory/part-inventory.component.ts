@@ -32,7 +32,6 @@ export class PartInventoryComponent implements OnInit {
     this.getPartInventories();
     this.partInventoryService.getPartTypeCombo().then(res => res.json())
     .then(json => {
-      console.log(json)
     })
   }
 
