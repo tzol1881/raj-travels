@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PartTypeMaintanceService {
-  port = 'https://www.icoy.co.in/transport/api'
+  port = 'https://www.elated-gauss.74-208-62-160.plesk.page/transport/api'
   getPartTypes(){
     return  fetch(`${this.port}/getPartDateList`,{
       method: "POST",

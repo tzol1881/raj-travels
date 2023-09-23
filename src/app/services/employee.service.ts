@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class EmployeeService {
 
   constructor(private http: HttpClient) { }
-  port = 'https://www.icoy.co.in/transport/api'
+  port = 'https://www.elated-gauss.74-208-62-160.plesk.page/transport/api'
   getEmployeeList(){
     return  fetch(`${this.port}/getEmployeeList`,{
       method: "POST",

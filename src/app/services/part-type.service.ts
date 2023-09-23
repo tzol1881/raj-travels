@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class PartTypeService {
 
   constructor(private http: HttpClient) { }
-  port = 'https://www.icoy.co.in/transport/api'
+  port = 'https://www.elated-gauss.74-208-62-160.plesk.page/transport/api'
   getPartType(){
     return  fetch(`${this.port}/getPartTypeList`,{
       method: "POST",

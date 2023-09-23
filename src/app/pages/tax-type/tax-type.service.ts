@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class TaxTypeService {
 
   constructor() { }
-  port = 'https://www.icoy.co.in/transport/api'
+  port = 'https://www.elated-gauss.74-208-62-160.plesk.page/transport/api'
   getTaxTypes(){
     return  fetch(`${this.port}/getTaxTypeList`,{
       method: "POST",
