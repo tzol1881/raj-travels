@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatRadioModule } from '@angular/material/radio';
 import { VehicalMasterRoutingModule } from './vehical-master-routing.module';
 
 @NgModule({
@@ -46,6 +47,7 @@ import { VehicalMasterRoutingModule } from './vehical-master-routing.module';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSidenavModule,
+    MatRadioModule,
     VehicalMasterRoutingModule
   ]
 })

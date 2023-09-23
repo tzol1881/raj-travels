@@ -14,6 +14,17 @@ export function ValidateMaxLength(max:number): ValidatorFn {
   };
 };
 
+export function ValidateMinLength(min:number): ValidatorFn {
+  return (control: AbstractControl) => {
+    if(String(control.value)?.length < min){
+      return {
+         inValidLength: true
+      };
+    }
+    return null;
+  };
+};
+
 @Component({
   selector: 'app-edit-vehical',
   templateUrl: './edit-vehical.component.html',
@@ -34,6 +45,7 @@ export class EditVehicalComponent implements OnInit {
                 @Inject(MAT_DIALOG_DATA) public vehical: any) { }
 
   ngOnInit(): void {
+    let isDisabled = this.vehical.reRegister
     if(this.vehical.vehical){
       this.vehicalDetails = this.vehical.vehical;
       if(this.vehicalDetails.id)
@@ -41,20 +53,25 @@ export class EditVehicalComponent implements OnInit {
     }
     this.editVehical = this.formBuilder.group({
       id: [this.vehicalDetails?.id],
-      Reg_no: [this.vehicalDetails?.Reg_no, [Validators.required, ValidateMaxLength(10)]],
+      Reg_no: [this.vehicalDetails?.Reg_no.toUpperCase(), [Validators.required, ValidateMaxLength(10), ValidateMinLength(10)]],
       Reg_date: [this.vehicalDetails?.Reg_date, [Validators.required]],
-      Veh_Owner_Name: [this.vehicalDetails?.Veh_Owner_Name, [Validators.required, ValidateMaxLength(100)]],
+      Veh_Owner_Name: [{value: this.vehicalDetails?.Veh_Owner_Name, disabled: isDisabled}, [Validators.required, ValidateMaxLength(100)]],
       Veh_Owner_Address: [this.vehicalDetails?.Veh_Owner_Address, [Validators.required, ValidateMaxLength(100)]],
-      Veh_Chassis_No: [this.vehicalDetails?.Veh_Chassis_No, [Validators.required, ValidateMaxLength(18)]],
-      Veh_Engine_No: [this.vehicalDetails?.Veh_Engine_No, [Validators.required, ValidateMaxLength(12)]],
-      Veh_Class: [this.vehicalDetails?.Veh_Class, [Validators.required, ValidateMaxLength(18)]],
-      Veh_Maker_Name: [this.vehicalDetails?.Veh_Maker_Name, [Validators.required, ValidateMaxLength(25)]],
-      Veh_Seating_Cap: [this.vehicalDetails?.Veh_Seating_Cap, [Validators.required, ValidateMaxLength(11)]],
-      Veh_Color: [this.vehicalDetails?.Veh_Color, [Validators.required, ValidateMaxLength(25)]],
-      Veh_horse_Power: [this.vehicalDetails?.Veh_horse_Power, [Validators.required, ValidateMaxLength(25)]],
-      Veh_Fuel_Type: [this.vehicalDetails?.Veh_Fuel_Type, [Validators.required, ValidateMaxLength(25)]],
-      Veh_Reg_City_ID: [this.vehicalDetails?.Veh_Reg_City_ID, [Validators.required, ValidateMaxLength(11)]],
-      Veh_Reg_State_ID: [this.vehicalDetails?.Veh_Reg_State_ID, [Validators.required, ValidateMaxLength(11)]],
+      Veh_Chassis_No: [{value: this.vehicalDetails?.Veh_Chassis_No, disabled: isDisabled}, [Validators.required, ValidateMaxLength(18)]],
+      Veh_Engine_No: [{value: this.vehicalDetails?.Veh_Engine_No, disabled: isDisabled}, [Validators.required, ValidateMaxLength(12)]],
+      Veh_Class: [{value: this.vehicalDetails?.Veh_Class, disabled: isDisabled}, [Validators.required, ValidateMaxLength(18)]],
+      Veh_Maker_Name: [{value: this.vehicalDetails?.Veh_Maker_Name, disabled: isDisabled}, [Validators.required, ValidateMaxLength(25)]],
+      Veh_Seating_Cap: [{value: this.vehicalDetails?.Veh_Seating_Cap, disabled: isDisabled}, [Validators.required, ValidateMaxLength(11)]],
+      Veh_Color: [{value: this.vehicalDetails?.Veh_Color, disabled: isDisabled}, [Validators.required, ValidateMaxLength(25)]],
+      Veh_horse_Power: [{value: this.vehicalDetails?.Veh_horse_Power, disabled: isDisabled}, [Validators.required, ValidateMaxLength(25)]],
+      Veh_Fuel_Type: [{value: this.vehicalDetails?.Veh_Fuel_Type, disabled: isDisabled}, [Validators.required, ValidateMaxLength(25)]],
+      Veh_Reg_City_ID: [{value: this.vehicalDetails?.Veh_Reg_City_ID, disabled: isDisabled}, [Validators.required, ValidateMaxLength(11)]],
+      Veh_Reg_State_ID: [{value: this.vehicalDetails?.Veh_Reg_State_ID, disabled: isDisabled}, [Validators.required, ValidateMaxLength(11)]],
+      status: [{value: this.vehicalDetails?.status || 1, disabled: isDisabled}],
+    });
+    const registerNumberControl = this.editVehical.get('Reg_no');
+    registerNumberControl?.valueChanges.subscribe(() => {
+      registerNumberControl.patchValue(registerNumberControl.value.toUpperCase(), {emitEvent: false});
     });
     this.vehicalService.getStateList().then(res => res.json())
     .then(json => {
@@ -77,7 +94,12 @@ export class EditVehicalComponent implements OnInit {
       data.ModifiedBy = 1;
       let dateData = new Date(data.Reg_date);
       data.Reg_date = `${dateData.getFullYear()}-${dateData.getMonth()}-${dateData.getDate()}`;
-      this.vehicalService.editVehical(data).then(result => result.json()).then(res => this.dialogRef.close(res))
+      if(this.vehical.reRegister){
+        data = {...this.editVehical.getRawValue()}
+        this.vehicalService.reRegisterVehical(data).then(result => result.json()).then(res => this.dialogRef.close(res))
+      }else{
+        this.vehicalService.editVehical(data).then(result => result.json()).then(res => this.dialogRef.close(res))
+      }
     }else{
       let data = {...this.editVehical.value}
       delete data.id;

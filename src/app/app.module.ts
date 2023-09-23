@@ -22,6 +22,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 // Angular components import
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
@@ -53,6 +55,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSidenavModule,
+    MatCheckboxModule,
+    MatRadioModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
   ],

@@ -3,7 +3,7 @@
     <form class="edit-product-form" [formGroup]="editVehical" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline">
             <mat-label>Registration number</mat-label>
-            <input matInput type="number" formControlName="Reg_no">
+            <input matInput formControlName="Reg_no">
             <mat-error *ngIf="editVehical?.get('Reg_no')?.hasError('required')">Required</mat-error>
             <mat-error *ngIf="editVehical?.get('Reg_no')?.hasError('inValidLength')">Max length should be 10</mat-error>
         </mat-form-field>
@@ -94,6 +94,13 @@
             </mat-select>
             <mat-error>Required</mat-error>
         </mat-form-field>
+        <section class="status-radio-button-container">
+            <label>Status:</label>
+            <mat-radio-group formControlName="status">
+              <mat-radio-button class="status-radio-button" [value]=1>Active</mat-radio-button>
+              <mat-radio-button class="status-radio-button" [value]=0>Inactive</mat-radio-button>
+            </mat-radio-group>
+          </section>
         <div class="button-container">
             <button type="button" (click)="onCancel()" mat-stroked-button color="primary">Cancel</button>
             <button type="submit" mat-stroked-button color="primary" [disabled]="!editVehical.valid">Save</button>

@@ -82,6 +82,21 @@ export class VehicalService {
     })
   }
 
+  reRegisterVehical(data: any){
+    return  fetch(`${this.port}/reregistration`,{
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(data),
+    })
+  }
+
   deleteVehical(data: any){
     return  fetch(`${this.port}/deleteVehicleMaster`,{
       method: "POST",

@@ -62,6 +62,20 @@ export class VehicalListComponent implements OnInit {
   });
   }
 
+  reRegisterVehical(vehical: any): void {
+    const dialogRef = this.dialog.open(EditVehicalComponent, {
+      panelClass: 'custom-dialog-container',
+      width: '50rem',
+      data: { vehical: vehical, reRegister: true},
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getVehicals();
+        this.snackBar.open(result.message,'X')
+      }
+  });
+  }
+
   addVehical(): void {
     const dialogRef = this.dialog.open(EditVehicalComponent, {
       panelClass: 'custom-dialog-container',
