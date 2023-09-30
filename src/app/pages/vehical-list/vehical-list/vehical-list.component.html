@@ -95,17 +95,21 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> Action </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="primary" matTooltip="Edit part type" matTooltipPosition="after"
+          <button mat-icon-button color="primary" matTooltip="Edit vehical" matTooltipPosition="after"
             (click)="editVehical(element)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="primary" matTooltip="Delete part type" matTooltipPosition="after"
+          <button mat-icon-button color="primary" matTooltip="Delete vehical" matTooltipPosition="after"
             (click)="deleteVehical(element.id)">
             <mat-icon>delete_outline</mat-icon>
           </button>
-          <button mat-icon-button color="primary" matTooltip="Edit part type" matTooltipPosition="after"
+          <button mat-icon-button color="primary" matTooltip="Re-resister vehical" matTooltipPosition="after"
             (click)="reRegisterVehical(element)">
-            Re-resister
+            <mat-icon>assignment_return</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" matTooltip="View vehical" matTooltipPosition="after"
+            (click)="viewVehical(element)">
+            <mat-icon>remove_red_eye</mat-icon>
           </button>
         </td>
       </ng-container>

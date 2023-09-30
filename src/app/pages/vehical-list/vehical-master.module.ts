@@ -22,12 +22,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatRadioModule } from '@angular/material/radio';
 import { VehicalMasterRoutingModule } from './vehical-master-routing.module';
+import { VehicalDetailsComponent } from './vehical-details/vehical-details.component';
 
 @NgModule({
   declarations: [
     VehicalListComponent,
     EditVehicalComponent,
-    DeleteConfirmComponent
+    DeleteConfirmComponent,
+    VehicalDetailsComponent
   ],
   imports: [
     CommonModule,

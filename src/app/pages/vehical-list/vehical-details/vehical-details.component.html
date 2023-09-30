@@ -1,0 +1,23 @@
+<div class="edit-product-form-container">
+    <h3 class="products-title">{{title}}</h3>
+    <table cellpadding="5" cellspacing="5" >
+        <tr><td class="label">Register number:</td><td>{{vehicalDetails.Reg_no.toUpperCase()}}</td></tr>
+        <tr><td class="label">Register date:</td><td>{{vehicalDetails.Reg_date}}</td></tr>
+        <tr><td class="label">Owner name:</td><td>{{vehicalDetails.Veh_Owner_Name}}</td></tr>
+        <tr><td class="label">Owner address:</td><td>{{vehicalDetails.Veh_Owner_Address}}</td></tr>
+        <tr><td class="label">Chassis number:</td><td>{{vehicalDetails.Veh_Chassis_No}}</td></tr>
+        <tr><td class="label">Engine number:</td><td>{{vehicalDetails.Veh_Engine_No}}</td></tr>
+        <tr><td class="label">Class:</td><td>{{vehicalDetails.Veh_Class}}</td></tr>
+        <tr><td class="label">Maker:</td><td>{{vehicalDetails.Veh_Maker_Name}}</td></tr>
+        <tr><td class="label">Seating capacity:</td><td>{{vehicalDetails.Veh_Seating_Cap}}</td></tr>
+        <tr><td class="label">Color:</td><td>{{vehicalDetails.Veh_Color}}</td></tr>
+        <tr><td class="label">Horse power:</td><td>{{vehicalDetails.Veh_horse_Power}}</td></tr>
+        <tr><td class="label">Fuel type:</td><td>{{vehicalDetails.Veh_Fuel_Type}}</td></tr>
+        <tr><td class="label">City:</td><td>{{vehicalDetails.Veh_Reg_City_ID}}</td></tr>
+        <tr><td class="label">State:</td><td>{{vehicalDetails.Veh_Reg_State_ID}}</td></tr>
+        <tr><td class="label">Status:</td><td>{{vehicalDetails.status ? 'Active' : 'Inactive'}}</td></tr>
+    </table>
+    <div class="button-container">
+        <button type="button" (click)="onCancel()" mat-stroked-button color="primary">Close</button>
+    </div>
+</div>

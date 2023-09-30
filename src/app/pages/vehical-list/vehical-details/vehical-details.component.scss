@@ -1,0 +1,25 @@
+.edit-product-form-container {
+    padding: 10px 20px 20px 20px;
+    .products-title {
+        color: #3f51b5;
+    }
+    
+    td {
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .label{
+        font-weight: 500;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 25rem;
+    }
+    
+    .button-container{
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+    }
+}

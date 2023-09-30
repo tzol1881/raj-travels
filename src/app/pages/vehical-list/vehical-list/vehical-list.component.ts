@@ -9,6 +9,7 @@ import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.compone
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { VehicalService } from 'src/app/services/vehical.service';
 import { EditVehicalComponent } from '../edit-vehical/edit-vehical.component';
+import { VehicalDetailsComponent } from '../vehical-details/vehical-details.component';
 
 @Component({
   selector: 'app-vehical-list',
@@ -74,6 +75,14 @@ export class VehicalListComponent implements OnInit {
         this.snackBar.open(result.message,'X')
       }
   });
+  }
+
+  viewVehical(vehical: any): void {
+    const dialogRef = this.dialog.open(VehicalDetailsComponent, {
+      panelClass: 'custom-dialog-container',
+      width: '30rem',
+      data: { vehical: vehical},
+    })
   }
 
   addVehical(): void {
