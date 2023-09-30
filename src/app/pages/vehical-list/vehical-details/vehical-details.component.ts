@@ -8,7 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class VehicalDetailsComponent implements OnInit {
   vehicalDetails: any = null;
-  title = 'Vehical details';
+  title = 'Vehicle details';
   constructor(public dialogRef: MatDialogRef<VehicalDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public vehical: any) { }
 
