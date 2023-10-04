@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { apiEndPoint } from './endPoint';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class PartInventoryService {
 
   constructor() { }
-  port = 'https://www.elated-gauss.74-208-62-160.plesk.page/transport/api'
+  port = apiEndPoint;
   getPartTypeCombo() {
     return fetch(`${this.port}/getPartTypeCombo`, {
       method: "POST",
