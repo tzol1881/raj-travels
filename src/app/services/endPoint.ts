@@ -1,2 +1,2 @@
-export const apiEndPoint = 'https://www.icoy.co.in/transport/api';
+export const apiEndPoint = 'http://74.208.62.160/plesk-site-preview/www.rajtraveles.in/https/74.208.62.160/transport/api';
 //export const apiEndPoint = 'https://www.elated-gauss.74-208-62-160.plesk.page/transport/api';
