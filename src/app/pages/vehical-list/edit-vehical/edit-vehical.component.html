@@ -3,7 +3,7 @@
     <form class="edit-product-form" [formGroup]="editVehical" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline">
             <mat-label>Registration number</mat-label>
-            <input matInput formControlName="Reg_no">
+            <input matInput formControlName="Reg_no" maxlength="10">
             <mat-error *ngIf="editVehical?.get('Reg_no')?.hasError('required')">Required</mat-error>
             <mat-error *ngIf="editVehical?.get('Reg_no')?.hasError('inValidLength')">Max length should be 10</mat-error>
         </mat-form-field>
@@ -27,7 +27,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Chassis number</mat-label>
-            <input matInput type="text" formControlName="Veh_Chassis_No">
+            <input matInput type="text" formControlName="Veh_Chassis_No" maxlength="18">
             <mat-error *ngIf="editVehical?.get('Veh_Chassis_No')?.hasError('required')">Required</mat-error>
             <mat-error *ngIf="editVehical?.get('Veh_Chassis_No')?.hasError('inValidLength')">Max length should be 18</mat-error>
         </mat-form-field>
@@ -79,18 +79,18 @@
             <mat-error>Required</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-            <mat-label>City</mat-label>
-            <mat-select [(value)]="selectedCity" formControlName="Veh_Reg_City_ID">
+            <mat-label>State</mat-label>
+            <mat-select [(value)]="selectedState" formControlName="Veh_Reg_State_ID" >
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let city of cities" [value]="city['id']">{{city['name']}}</mat-option>
+                <mat-option *ngFor="let state of states" [value]="state['id']" (click)="getCity(state['id'])">{{state['state_name']}}</mat-option>
             </mat-select>
             <mat-error>Required</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-            <mat-label>State</mat-label>
-            <mat-select [(value)]="selectedState" formControlName="Veh_Reg_State_ID">
+            <mat-label>City</mat-label>
+            <mat-select [(value)]="selectedCity" formControlName="Veh_Reg_City_ID">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let state of states" [value]="state['id']">{{state['state_name']}}</mat-option>
+                <mat-option *ngFor="let city of cities" [value]="city['id']">{{city['name']}}</mat-option>
             </mat-select>
             <mat-error>Required</mat-error>
         </mat-form-field>

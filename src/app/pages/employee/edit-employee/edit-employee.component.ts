@@ -62,21 +62,20 @@ export class EditEmployeeComponent implements OnInit {
       monthly_cost: [this.employeeDetails?.monthly_cost, [Validators.required]],
       employee_start_date: [this.employeeDetails?.employee_start_date, [Validators.required]],
       phone_no: [this.employeeDetails?.phone_no, [Validators.required, ValidateMaxLength(50)]],
-      alt_phone_no: [this.employeeDetails?.alt_phone_no, [Validators.required, ValidateMaxLength(50)]],
-      remarks: [this.employeeDetails?.remarks, [Validators.required]],
+      alt_phone_no: [this.employeeDetails?.alt_phone_no, [ValidateMaxLength(50)]],
+      remarks: [this.employeeDetails?.remarks],
     });
     this.vehicalService.getStateList().then(res => res.json())
     .then(json => {
       this.states = json.data;
       this.employee.employee ? this.selectedState = this.states.filter(state => state['state_name'] === this.employeeDetails.state)[0]['id'] : '';
       this.editEmployee.controls['state_id'].setValue(this.selectedState);
-    })
-
-    this.vehicalService.getCityList().then(res => res.json())
-    .then(json => {
-      this.cities = json.data;
-      this.employee.employee ? this.selectedCity = this.cities.filter(city => city['name'] === this.employeeDetails.city)[0]['id'] : '';
-      this.editEmployee.controls['city_id'].setValue(this.selectedCity);
+      this.vehicalService.getCityByStateList({id: this.selectedState}).then(res => res.json())
+      .then(json => {
+        this.cities = json.data;
+        this.employee.employee ? this.selectedCity = this.cities.filter(city => city['name'] === this.employeeDetails.city)[0]['id'] : '';
+        this.editEmployee.controls['city_id'].setValue(this.selectedCity);
+      })
     })
 
     this.employee.employee && this.editEmployee.controls['country_id'].setValue('1');
@@ -103,5 +102,14 @@ export class EditEmployeeComponent implements OnInit {
 
   onCancel(){
     this.dialogRef.close();
+  }
+
+  getCity(stateId: any){
+    this.vehicalService.getCityByStateList({id: stateId}).then(res => res.json())
+    .then(json => {
+      this.cities = json.data;
+      this.selectedCity = '';
+      this.editEmployee.controls['city_id'].setValue(this.selectedCity);
+    })
   }
 }

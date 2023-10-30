@@ -63,10 +63,19 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
+            <mat-label>Country</mat-label>
+            <mat-select [(value)]="selectedCountry" formControlName="country_id">
+                <mat-option>None</mat-option>
+                <mat-option value="1">India</mat-option>
+            </mat-select>
+            <mat-error>Required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
             <mat-label>State</mat-label>
             <mat-select [(value)]="selectedState" formControlName="state_id">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let state of states" [value]="state['id']">{{state['state_name']}}</mat-option>
+                <mat-option *ngFor="let state of states" [value]="state['id']" (click)="getCity(state['id'])">{{state['state_name']}}</mat-option>
             </mat-select>
             <mat-error>Required</mat-error>
         </mat-form-field>
@@ -76,15 +85,6 @@
             <mat-select [(value)]="selectedCity" formControlName="city_id">
                 <mat-option>None</mat-option>
                 <mat-option *ngFor="let city of cities" [value]="city['id']">{{city['name']}}</mat-option>
-            </mat-select>
-            <mat-error>Required</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Country</mat-label>
-            <mat-select [(value)]="selectedCountry" formControlName="country_id">
-                <mat-option>None</mat-option>
-                <mat-option value="1">India</mat-option>
             </mat-select>
             <mat-error>Required</mat-error>
         </mat-form-field>
@@ -112,21 +112,20 @@
         <mat-form-field appearance="outline">
             <mat-label>Phone number</mat-label>
             <input matInput type="number" formControlName="phone_no">
-            <mat-error *ngIf="editEmployee?.get('email_id')?.hasError('required')">Required</mat-error>
-            <mat-error *ngIf="editEmployee?.get('email_id')?.hasError('inValidLength')">Max length should be 50</mat-error>
+            <mat-error *ngIf="editEmployee?.get('phone_no')?.hasError('required')">Required</mat-error>
+            <mat-error *ngIf="editEmployee?.get('phone_no')?.hasError('inValidLength')">Max length should be 50</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Alternate phone number</mat-label>
             <input matInput type="number" formControlName="alt_phone_no">
-            <mat-error *ngIf="editEmployee?.get('email_id')?.hasError('required')">Required</mat-error>
-            <mat-error *ngIf="editEmployee?.get('email_id')?.hasError('inValidLength')">Max length should be 50</mat-error>
+            <mat-error *ngIf="editEmployee?.get('alt_phone_no')?.hasError('inValidLength')">Max length should be 50</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Remarks</mat-label>
             <input matInput type="text" formControlName="remarks">
-            <mat-error *ngIf="editEmployee?.get('remarks')?.hasError('required')">Required</mat-error>
+            <!-- <mat-error *ngIf="editEmployee?.get('remarks')?.hasError('required')">Required</mat-error> -->
         </mat-form-field>
 
         <div class="button-container">

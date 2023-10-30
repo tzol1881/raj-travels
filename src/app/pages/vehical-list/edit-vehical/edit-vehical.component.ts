@@ -57,7 +57,7 @@ export class EditVehicalComponent implements OnInit {
       Reg_date: [this.vehicalDetails?.Reg_date, [Validators.required]],
       Veh_Owner_Name: [{value: this.vehicalDetails?.Veh_Owner_Name, disabled: isDisabled}, [Validators.required, ValidateMaxLength(100)]],
       Veh_Owner_Address: [this.vehicalDetails?.Veh_Owner_Address, [Validators.required, ValidateMaxLength(100)]],
-      Veh_Chassis_No: [{value: this.vehicalDetails?.Veh_Chassis_No, disabled: isDisabled}, [Validators.required, ValidateMaxLength(18)]],
+      Veh_Chassis_No: [{value: this.vehicalDetails?.Veh_Chassis_No.toUpperCase(), disabled: isDisabled}, [Validators.required, ValidateMaxLength(18)]],
       Veh_Engine_No: [{value: this.vehicalDetails?.Veh_Engine_No, disabled: isDisabled}, [Validators.required, ValidateMaxLength(12)]],
       Veh_Class: [{value: this.vehicalDetails?.Veh_Class, disabled: isDisabled}, [Validators.required, ValidateMaxLength(18)]],
       Veh_Maker_Name: [{value: this.vehicalDetails?.Veh_Maker_Name, disabled: isDisabled}, [Validators.required, ValidateMaxLength(25)]],
@@ -73,18 +73,21 @@ export class EditVehicalComponent implements OnInit {
     registerNumberControl?.valueChanges.subscribe(() => {
       registerNumberControl.patchValue(registerNumberControl.value.toUpperCase(), {emitEvent: false});
     });
+    const chasisNumberControl = this.editVehical.get('Veh_Chassis_No');
+    chasisNumberControl?.valueChanges.subscribe(() => {
+      chasisNumberControl.patchValue(chasisNumberControl?.value.toUpperCase(), {emitEvent: false});
+    });
     this.vehicalService.getStateList().then(res => res.json())
     .then(json => {
       this.states = json.data;
       this.vehical.vehical ? this.selectedState = this.states.filter(state => state['state_name'] === this.vehicalDetails.Veh_Reg_State_ID)[0]['id'] : '';
       this.editVehical.controls['Veh_Reg_State_ID'].setValue(this.selectedState);
-    })
-
-    this.vehicalService.getCityList().then(res => res.json())
-    .then(json => {
-      this.cities = json.data;
-      this.vehical.vehical ? this.selectedCity = this.cities.filter(city => city['name'] === this.vehicalDetails.Veh_Reg_City_ID)[0]['id'] : '';
-      this.editVehical.controls['Veh_Reg_City_ID'].setValue(this.selectedCity);
+      this.vehicalService.getCityByStateList({id: this.selectedState}).then(res => res.json())
+      .then(json => {
+        this.cities = json.data;
+        this.vehical.vehical ? this.selectedCity = this.cities.filter(city => city['name'] === this.vehicalDetails.Veh_Reg_City_ID)[0]['id'] : '';
+        this.editVehical.controls['Veh_Reg_City_ID'].setValue(this.selectedCity);
+      })
     })
   }
 
@@ -112,5 +115,14 @@ export class EditVehicalComponent implements OnInit {
 
   onCancel(){
     this.dialogRef.close();
+  }
+
+  getCity(stateId: any){
+    this.vehicalService.getCityByStateList({id: stateId}).then(res => res.json())
+    .then(json => {
+      this.cities = json.data;
+      this.selectedCity = '';
+      this.editVehical.controls['Veh_Reg_City_ID'].setValue(this.selectedCity);
+    })
   }
 }

@@ -112,4 +112,19 @@ export class VehicalService {
       body: JSON.stringify(data),
     })
   }
+
+  getCityByStateList(data: any){
+    return  fetch(`${this.port}/getCityByStateList`,{
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(data),
+    })
+  }
 }
