@@ -58,7 +58,7 @@ export class EditVehicalComponent implements OnInit {
       Veh_Owner_Name: [{value: this.vehicalDetails?.Veh_Owner_Name, disabled: isDisabled}, [Validators.required, ValidateMaxLength(100)]],
       Veh_Owner_Address: [this.vehicalDetails?.Veh_Owner_Address, [Validators.required, ValidateMaxLength(100)]],
       Veh_Chassis_No: [{value: this.vehicalDetails?.Veh_Chassis_No.toUpperCase(), disabled: isDisabled}, [Validators.required, ValidateMaxLength(18)]],
-      Veh_Engine_No: [{value: this.vehicalDetails?.Veh_Engine_No, disabled: isDisabled}, [Validators.required, ValidateMaxLength(12)]],
+      Veh_Engine_No: [{value: this.vehicalDetails?.Veh_Engine_No.toUpperCase(), disabled: isDisabled}, [Validators.required]],
       Veh_Class: [{value: this.vehicalDetails?.Veh_Class, disabled: isDisabled}, [Validators.required, ValidateMaxLength(18)]],
       Veh_Maker_Name: [{value: this.vehicalDetails?.Veh_Maker_Name, disabled: isDisabled}, [Validators.required, ValidateMaxLength(25)]],
       Veh_Seating_Cap: [{value: this.vehicalDetails?.Veh_Seating_Cap, disabled: isDisabled}, [Validators.required, ValidateMaxLength(11)]],
@@ -76,6 +76,10 @@ export class EditVehicalComponent implements OnInit {
     const chasisNumberControl = this.editVehical.get('Veh_Chassis_No');
     chasisNumberControl?.valueChanges.subscribe(() => {
       chasisNumberControl.patchValue(chasisNumberControl?.value.toUpperCase(), {emitEvent: false});
+    });
+    const engineNumberControl = this.editVehical.get('Veh_Engine_No');
+    engineNumberControl?.valueChanges.subscribe(() => {
+      engineNumberControl.patchValue(engineNumberControl?.value.toUpperCase(), {emitEvent: false});
     });
     this.vehicalService.getStateList().then(res => res.json())
     .then(json => {
