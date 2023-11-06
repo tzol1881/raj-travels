@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { apiEndPoint } from '../../services/endPoint';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class TaxDataService {
 
   constructor() { }
-  port = 'https://www.icoy.co.in/transport/api'
+  port = apiEndPoint;
   getTaxData(){
     return  fetch(`${this.port}/getTaxDateList`,{
       method: "POST",

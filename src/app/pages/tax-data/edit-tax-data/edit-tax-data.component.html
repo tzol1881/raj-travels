@@ -5,7 +5,7 @@
             <mat-label>Tax type</mat-label>
             <mat-select [(value)]="selectedType" formControlName="tax_type_master_id">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let taxType of taxTypes" [value]="taxType['id']">{{taxType['tax_type']}}</mat-option>
+                <mat-option *ngFor="let taxType of taxTypes" [value]="taxType['tax_type_id']">{{taxType['tax_type']}}</mat-option>
             </mat-select>
             <mat-error>Required</mat-error>
         </mat-form-field>
@@ -35,11 +35,11 @@
             <mat-datepicker #topicker></mat-datepicker>
         </mat-form-field>
         <mat-error *ngIf="editTaxData.errors && editTaxData.errors['dateValid'] && (editTaxData.touched ||editTaxData.dirty)">End date should be greater than start date</mat-error>
-        <mat-form-field appearance="outline">
+        <!-- <mat-form-field appearance="outline">
             <mat-label>Validity</mat-label>
             <input matInput type="text" formControlName="tax_type_validity">
             <mat-error>Required</mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
         <mat-form-field appearance="outline">
             <mat-label>Current reading</mat-label>
             <input matInput type="text" formControlName="vehicle_meter_reading">

@@ -17,7 +17,7 @@ import { TaxDataService } from '../tax-data.service';
 export class TaxDataComponent implements OnInit {
 
   taxTypes: [] = [];
-  displayedColumns: string[] = ['Type', 'Validity', 'Bus number', 'From date', 'to date', 'Reading', 'Cost', 'action'];
+  displayedColumns: string[] = ['Type', 'Bus number', 'From date', 'to date', 'Reading', 'Cost', 'action'];
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
   dataSource = new MatTableDataSource();

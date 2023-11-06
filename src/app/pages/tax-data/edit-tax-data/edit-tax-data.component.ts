@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TaxDataService } from '../tax-data.service';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { TaxTypeService } from '../../tax-type/tax-type.service';
 
 export const dateValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const start = new Date(control.get('tax_type_submission_start_date')?.value);
@@ -26,7 +27,8 @@ export class EditTaxDataComponent implements OnInit {
   constructor(  private formBuilder: FormBuilder,
                 public taxDataService: TaxDataService,
                 public dialogRef: MatDialogRef<EditTaxDataComponent>,
-                @Inject(MAT_DIALOG_DATA) public taxData: any) { }
+                @Inject(MAT_DIALOG_DATA) public taxData: any,
+                private taxTypeService: TaxTypeService) { }
 
   
   ngOnInit(): void {
@@ -37,7 +39,7 @@ export class EditTaxDataComponent implements OnInit {
       this.editTaxData.controls['reg_no'].setValue(this.selectedRegNo);
     })
 
-    this.taxDataService.getTaxTypeCombo().then(res => res.json())
+    this.taxTypeService.getTaxTypes().then(res => res.json())
     .then(json => {
       this.taxTypes = json.data;
       this.taxData.taxData ? this.selectedType = this.taxTypes.filter(taxType => taxType['id'] === this.taxDataDetails.tax_type_id)[0]['id'] : '';
@@ -52,11 +54,10 @@ export class EditTaxDataComponent implements OnInit {
     this.editTaxData = this.formBuilder.group({
       id: [this.taxDataDetails?.id],
       reg_no: [this.selectedRegNo, [Validators.required]],
-      tax_type_master_id: [this.taxDataDetails?.tax_type_master_id, [Validators.required]],
+      tax_type_master_id: [this.taxDataDetails?.tax_type_id, [Validators.required]],
       tax_type_amount: [this.taxDataDetails?.tax_type_amount, [Validators.required]],
       tax_type_submission_end_date: [this.taxDataDetails?.tax_type_submission_end_date, [Validators.required]],
       tax_type_submission_start_date: [this.taxDataDetails?.tax_type_submission_start_date, [Validators.required]],
-      tax_type_validity: [this.taxDataDetails?.tax_type_validity, [Validators.required]],
       vehicle_meter_reading: [this.taxDataDetails?.vehicle_meter_reading, [Validators.required]]
     },{validators:dateValidator});
   }

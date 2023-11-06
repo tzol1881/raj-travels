@@ -19,7 +19,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker'
     MatSnackBarModule,
     MatSelectModule,
     MatDatepickerModule,
+    MatRadioModule
   ]
 })
 export class TaxTypeMasterModule { }
