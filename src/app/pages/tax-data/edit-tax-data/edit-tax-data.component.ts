@@ -58,7 +58,7 @@ export class EditTaxDataComponent implements OnInit {
       tax_type_amount: [this.taxDataDetails?.tax_type_amount, [Validators.required]],
       tax_type_submission_end_date: [this.taxDataDetails?.tax_type_submission_end_date, [Validators.required]],
       tax_type_submission_start_date: [this.taxDataDetails?.tax_type_submission_start_date, [Validators.required]],
-      vehicle_meter_reading: [this.taxDataDetails?.vehicle_meter_reading, [Validators.required]]
+      vehicle_meter_reading: [this.taxDataDetails?.vehicle_meter_reading]
     },{validators:dateValidator});
   }
 
