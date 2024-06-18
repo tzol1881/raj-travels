@@ -11,7 +11,17 @@ export const dateValidator: ValidatorFn = (control: AbstractControl): Validation
   return start !== null && end !== null && start < end
   ? null :{ dateValid:true };
 }
-  
+
+export function ValidateQuantity(availableQuantity:number): ValidatorFn {
+  return (control: AbstractControl) => {
+    if(control.value > availableQuantity){
+      return {
+        inQuantity: true
+      };
+    }
+    return null;
+  };
+};
 @Component({
   selector: 'app-edit-part-type-maintance',
   templateUrl: './edit-part-type-maintance.component.html',
@@ -24,6 +34,8 @@ export class EditPartTypeMaintanceComponent implements OnInit {
   selectedRegNo = '';
   selectedPartType = '';
   title = 'Add part data';
+  availableQuantity = 0;
+  quantityTypes = ['Pcs', 'Litre', 'Kg'];
   editPartTypeData: FormGroup = new FormGroup({})
   constructor(  private formBuilder: FormBuilder,
                 public partTypeMaintanceService: PartTypeMaintanceService,
@@ -44,6 +56,9 @@ export class EditPartTypeMaintanceComponent implements OnInit {
       this.partTypes = json.data;
       this.partTypeData.partTypeData ? this.selectedPartType = this.partTypes.filter(partType => partType['id'] === this.partTypeDetails.part_type_id)[0]['id'] : this.selectedPartType = '';
       this.editPartTypeData.controls['part_type_master_id'].setValue(this.selectedPartType);
+      if(this.selectedPartType){
+        this.getQuantity(this.selectedPartType);
+      }
     })
 
     if(this.partTypeData.partTypeData){
@@ -51,11 +66,20 @@ export class EditPartTypeMaintanceComponent implements OnInit {
       if(this.partTypeData.id)
        this.title = 'Edit part data';
     }
+
+    const part_type_master_id = this.editPartTypeData.get('part_type_master_id');
+
+    part_type_master_id?.valueChanges.subscribe((value) => {
+      this.getQuantity(value);
+    });
+
     this.editPartTypeData = this.formBuilder.group({
       id: [this.partTypeDetails?.id],
       reg_no: [this.selectedRegNo, [Validators.required]],
       part_type_master_id: [this.partTypeDetails?.part_type_master_id, [Validators.required]],
       part_type_amount: [this.partTypeDetails?.part_type_amount, [Validators.required]],
+      part_type_quantity: [this.partTypeDetails?.part_type_quantity, [Validators.required]],
+      part_type_unit: [this.partTypeDetails?.part_type_unit, [Validators.required]],
       part_type_fixing_date: [this.partTypeDetails?.part_type_fixing_date, [Validators.required]],
       part_type_expiry_date: [this.partTypeDetails?.part_type_expiry_date, [Validators.required]],
       vehicle_meter_reading: [this.partTypeDetails?.vehicle_meter_reading, [Validators.required]]
@@ -84,6 +108,18 @@ export class EditPartTypeMaintanceComponent implements OnInit {
   getFormmattedDate(date: any){
     let startDateData = new Date(date);
     return `${startDateData.getFullYear()}-${startDateData.getMonth() + 1}-${startDateData.getDate()}`;
+  }
+
+  getQuantity(part_type_master_id: any){
+    this.partTypeMaintanceService.getQuantityTypes({'part_type_master_id' : part_type_master_id}).then(res => res.json())
+    .then(json => {
+      const data = json.data[0]
+      this.availableQuantity = data.total_quantity - data.sum_quantity
+      const part_type_qty = this.editPartTypeData.get('part_type_quantity');
+      part_type_qty?.setValidators([
+        ValidateQuantity(this.availableQuantity)
+      ]);
+    })
   }
 
   onCancel(){

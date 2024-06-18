@@ -16,7 +16,7 @@ import { EditPartTypeComponent } from './../edit-part-type/edit-part-type.compon
 })
 export class PartTypeComponent implements OnInit {
   partTypes: [] = [];
-  displayedColumns: string[] = ['Type', 'Cost', 'Quantity', 'action'];
+  displayedColumns: string[] = ['Type', 'Cost', 'Quantity', 'Quantity type', 'action'];
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
   dataSource = new MatTableDataSource();

@@ -95,4 +95,20 @@ export class PartTypeMaintanceService {
       // body: JSON.stringify(data),
     })
   }
+
+  
+  getQuantityTypes(data: any){
+    return  fetch(`${this.port}/getquantity`,{
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(data),
+    })
+  }
 }

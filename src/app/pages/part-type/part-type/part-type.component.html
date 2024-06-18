@@ -11,7 +11,7 @@
       <ng-container matColumnDef="Type">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Part Type </th>
         <td mat-cell *matCellDef="let element"><span
-            class="title">{{element.part_type}}</span></td>
+            class="title">{{element.part_type}} - {{element.part_type_body}}</span></td>
       </ng-container>
 
       <ng-container matColumnDef="Cost">
@@ -23,6 +23,12 @@
       <ng-container matColumnDef="Quantity">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
         <td mat-cell *matCellDef="let element">{{element.part_type_qty}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Quantity type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity type </th>
+        <td mat-cell *matCellDef="let element">{{element.part_type_unit}}
         </td>
       </ng-container>
 

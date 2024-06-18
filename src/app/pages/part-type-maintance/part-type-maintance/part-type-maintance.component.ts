@@ -17,7 +17,7 @@ import { PartTypeMaintanceService } from 'src/app/services/part-type-maintance.s
 export class PartTypeMaintanceComponent implements OnInit {
 
   partTypeMaintances: [] = [];
-  displayedColumns: string[] = ['Type', 'Bus number', 'From date', 'to date', 'Cost', 'Reading', 'action'];
+  displayedColumns: string[] = ['Type', 'Bus number', 'From date', 'to date', 'Cost', 'Reading', 'Quantity', 'Quantity type', 'action'];
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
   dataSource = new MatTableDataSource();

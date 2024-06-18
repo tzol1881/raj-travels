@@ -13,6 +13,7 @@ export class EditPartTypeComponent implements OnInit {
   partTypes: [] = [];
   selected = '';
   title = 'Add part type';
+  quantityTypes = ['Pcs', 'Litre', 'Kg'];
   editPartType: FormGroup = new FormGroup({})
   constructor(  private formBuilder: FormBuilder,
                 public partTypeService: PartTypeService,
@@ -35,7 +36,8 @@ export class EditPartTypeComponent implements OnInit {
       id: [this.partTypeDetails?.id],
       part_type_id: [this.selected, [Validators.required]],
       part_Cost: [this.partTypeDetails?.part_Cost, [Validators.required]],
-      part_type_qty: [this.partTypeDetails?.part_type_qty, [Validators.required]]
+      part_type_qty: [this.partTypeDetails?.part_type_qty, [Validators.required]],
+      part_type_unit: [this.partTypeDetails?.part_type_unit, [Validators.required]]
     });
   }
 
