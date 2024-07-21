@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
+import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,20 +29,28 @@ export class DashboardComponent implements OnInit {
   private height_pie = 250 - (this.margin_pie * 2);
   private radius = Math.min(this.width_pie, this.height_pie) / 2 - this.margin_pie;
   private colors: any;
+  dashboardData: any;
+  dashboardDataKeys: any;
+  displayedColumns: string[] = ['Reg number', 'Start date', 'End date'];
 
-  constructor() { }
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
-    this.createBarSvg();
-    this.drawBars(this.data);
-    this.createBarSvg1();
-    this.drawBars1(this.data);
-    this.createPaiSvg();
-    this.createColors();
-    this.drawPai();
-    this.createScatterSvg();
-    this.drawPlot();
-    this.drawDonut();
+    // this.createBarSvg();
+    // this.drawBars(this.data);
+    // this.createBarSvg1();
+    // this.drawBars1(this.data);
+    // this.createPaiSvg();
+    // this.createColors();
+    // this.drawPai();
+    // this.createScatterSvg();
+    // this.drawPlot();
+    // this.drawDonut();
+    this.dashboardService.getDashboard().then(res => res.json())
+    .then(json => {
+      this.dashboardData = json.data
+      this.dashboardDataKeys = Object.keys(this.dashboardData)
+    })
   }
 
   private createBarSvg(): void {
